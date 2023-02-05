@@ -1,20 +1,21 @@
-public class LoggingServiceAdapter implements ILegacyDbLogger{
-    ILoggerService loggerService = new LoggerServiceImpl(Logger.getInstance());
+public class LoggerAdapter implements ILegacyDbLogger{
+    ILogger logger = Logger.getInstance();
+
     @Override
     public void outLog(String message, int severityLevel) {
         if(severityLevel == 1){
-            loggerService.info(message);
+            logger.outLog("Info", message);
         }
         if(severityLevel == 2){
-            loggerService.warn(message);
+            logger.outLog("Warning", message);
         }
         if(severityLevel == 3){
-            loggerService.error(message);
+            logger.outLog("Error", message);
         }
     }
 
     //This is only here to prove that the logger is a singleton, normally there would be no need to access this service like this
-    public ILoggerService getLoggerService() {
-        return loggerService;
+    public ILogger getLogger() {
+        return logger;
     }
 }

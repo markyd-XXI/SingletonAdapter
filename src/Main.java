@@ -12,8 +12,8 @@ public class Main {
         //This logger client is going to log the old way to the dB
         LoggerClient loggerClient1 = new LoggerClient(new LegacyDbLoggerImpl(), "User Login");
         //This logger client is going to log the new way to the log storage system
-        LoggerClient loggerClient2 = new LoggerClient(new LoggingServiceAdapter(), "Order Confirmation");
-        LoggerClient loggerClient3 = new LoggerClient(new LoggingServiceAdapter(), "Support Request");
+        LoggerClient loggerClient2 = new LoggerClient(new LoggerAdapter(), "Order Confirmation");
+        LoggerClient loggerClient3 = new LoggerClient(new LoggerAdapter(), "Support Request");
 
         //Both logger clients log the same way because the new logging method uses the LoggingServiceAdapter which makes the
         //Logging service "look" like an ILegacyDbLogger.
@@ -38,8 +38,8 @@ public class Main {
 
         System.out.println("---------------------------------------------------");
         System.out.println("Proof that there is only one instance of Logger Singleton:");
-        Logger loggerSingletonInstance1 = loggerClient2.getLogger().getLoggerService().getLogger();
-        Logger loggerSingletonInstance2 = loggerClient3.getLogger().getLoggerService().getLogger();
+        ILogger loggerSingletonInstance1 = loggerClient2.getLogger().getLogger();
+        ILogger loggerSingletonInstance2 = loggerClient3.getLogger().getLogger();
         System.out.println("Comparing the logger singleton instances:");
 
         if(loggerSingletonInstance2 == loggerSingletonInstance1){

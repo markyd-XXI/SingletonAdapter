@@ -6,7 +6,7 @@ public class LegacyDbLoggerImpl implements ILegacyDbLogger{
     }
 
     //This is only here to prove that the logger is a singleton, normally there would be no need to access this service like this
-    public ILoggerService getLoggerService() {
+    public ILogger getLogger() {
         return null;
     }
 }
